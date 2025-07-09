@@ -37,7 +37,7 @@ export default function Category() {
     { title: "Bangales", img: Bracelet },
   ];
   return (
-    <section className="py-5 px-4 bg-gray-50">
+    <section className="py-5  px-4 bg-gray-50">
     <div className="max-w-6xl mx-auto">
       <motion.div className="text-center my-10" variants={fadeInUp}>
         <div className="text-center my-10">

@@ -25,6 +25,7 @@ import Reel from "./Reel";
 import Category from "./Category";
 import NewArrival from "./NewArrival";
 import { useEffect, useState } from "react";
+import BestSellersSection from "./BestSeller";
 
 const containerVariants = {
   hidden: {},
@@ -271,6 +272,8 @@ const Home = () => {
           </motion.div>
         </div>
       </section>
+
+      <BestSellersSection />
 
       {/* Shop the Look – Reels Section */}
       <Reel />

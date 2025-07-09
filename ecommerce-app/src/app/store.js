@@ -14,17 +14,19 @@ import cartReducer from "../feautures/cartslice";
 import authReducer from "../feautures/authslice";
 
 import wishlistReducer from "../feautures/wishlistSlice";
+import filterReducer from "../feautures/filterslice";
 
 const rootReducer = combineReducers({
   cart: cartReducer,
   wishlist: wishlistReducer,
   auth: authReducer,
+  filter: filterReducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["cart", "wishlist","auth"],
+  whitelist: ["cart", "wishlist","auth","filter"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

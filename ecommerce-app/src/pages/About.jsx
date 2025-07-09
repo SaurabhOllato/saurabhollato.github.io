@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 const About = () => {
     return (
        <motion.div
-        className="bg-white text-gray-800"
+        className="bg-white text-gray-800 mt-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
@@ -11,12 +11,15 @@ const About = () => {
       >
       <section className="bg-white text-gray-800">
         {/* Hero Section */}
-        <div className="bg-primary py-16 px-4 text-center">
+        
+        <div className="bg-[url('https://img.fantaskycdn.com/b7c617f83a673be417a05dccba269628_1080x.jpeg')] bg-cover bg-center bg-no-repeat py-16 px-4 text-center">
+          
           <h1 className="text-4xl md:text-5xl font-bold mb-4">About Fashion Craze</h1>
-          <p className="max-w-2xl mx-auto text-gray-700 text-sm md:text-base">
+          <p className="max-w-2xl mx-auto text-gray-900 font-sans text-sm md:text-base">
             Where elegance meets affordability. Dive into our world of stunning artificial jewelry made to make you shine.
           </p>
         </div>
+        
   
         {/* Brand Story */}
         <div className="max-w-6xl mx-auto py-16 px-4 grid md:grid-cols-2 gap-12 items-center">
@@ -32,7 +35,7 @@ const About = () => {
   
           <div>
             <img
-              src="https://www.potential.com/wp-content/uploads/2018/02/Teamwork-Team-Together-Everyone-Acheives-More.png"
+              src="https://i.pinimg.com/736x/11/a5/8a/11a58aab251a0067238cbe9fcca6eae9.jpg"
               alt="Our team"
               className="w-full rounded-xl shadow-md object-cover h-[400px]"
             />
@@ -40,10 +43,10 @@ const About = () => {
         </div>
   
         {/* Mission & Values */}
-        <div className="bg-pink-50 py-16 px-4">
+        <div className="bg-gray-900 py-16 px-4">
           <div className="max-w-4xl mx-auto text-center mb-10">
-            <h2 className="text-3xl font-semibold text-gray-800 mb-2">Our Mission 💫</h2>
-            <p className="text-gray-600 text-sm md:text-base">
+            <h2 className="text-3xl font-semibold text-white mb-2">Our Mission 💫</h2>
+            <p className="text-white text-sm md:text-base">
               To make stylish, high-quality artificial jewelry accessible and fun for everyone.
             </p>
           </div>

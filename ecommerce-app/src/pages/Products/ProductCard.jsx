@@ -1,25 +1,25 @@
 import { Heart, ShoppingCart } from "lucide-react";
 
-import { addToCart } from "../feautures/cartActions";
+import { addToCart } from "../../feautures/cartActions";
 import { useDispatch, useSelector } from "react-redux";
-import { addToWishlist } from "../feautures/wishlistSlice";
+import { addToWishlist } from "../../feautures/wishlistSlice";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const cartItems = useSelector((state) => state.cart.cartItems);
 
+  const handleAddToCart = () => {
+    const isInCart = cartItems.find((i) => i._id === product._id);
+    dispatch(addToCart(product));
 
- const handleAddToCart = () => {
-  const isInCart = cartItems.find((i) => i._id === product._id);
-  dispatch(addToCart(product));
-
-  if (isInCart) {
-    toast.info("✅ Quantity increased (already in cart)");
-  } else {
-    toast.success("🛒 Added to cart!");
-  }
-};
+    if (isInCart) {
+      toast.info("✅ Quantity increased (already in cart)");
+    } else {
+      toast.success("🛒 Added to cart!");
+    }
+  };
   const wishlistItems = useSelector((state) => state.wishlist.wishlistItems);
   const isInWishlist = wishlistItems?.some((item) => item._id === product._id);
   const handleWishlist = () => {
@@ -45,25 +45,26 @@ const ProductCard = ({ product }) => {
           fill={isInWishlist ? "currentColor" : "none"} // fill only if in wishlist
         />
       </button>
-
+     <Link to={`/product/${product._id}`} className="block">
       {/* Product Image */}
       <img
         src={product.imageUrl}
         alt={product.name}
         className="w-full h-64 object-cover rounded-lg mb-4"
       />
+      </Link>
 
       {/* Product Info */}
       <div className="text-center">
-        <h3 className="text-lg font-semibold text-gray-800 mb-1">
+        <h3 className="text-lg font-semibold text-gray-800 mb-1 font-serif">
           {product.name}
         </h3>
-        <p className="text-pink-600 font-medium mb-2">₹{product.price}</p>
+        <p className="text-pink-600 font-medium mb-2 font-serif">₹{product.price}</p>
       </div>
 
       {/* Add to cart */}
       <button
-        className="w-full flex items-center justify-center gap-2 bg-pink-600 hover:bg-pink-700 text-white font-medium py-2 rounded-lg transition"
+        className="w-full flex items-center justify-center font-serif gap-2 bg-pink-600 hover:bg-pink-700 text-white font-medium py-2 rounded-lg transition"
         onClick={handleAddToCart}
       >
         <ShoppingCart className="w-5 h-5" />

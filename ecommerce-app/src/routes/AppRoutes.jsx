@@ -7,7 +7,7 @@ import { Routes, Route } from "react-router-dom";
 // import Login from "../pages/Login";
 import { AnimatePresence } from "framer-motion";
 import Shop from "../pages/Shop";
-import ProductDetail from "../pages/ProductDetail";
+// import ProductDetail from "../pages/ProductDetail";
 import Cart from "../pages/Cart";
 import CheckoutPage from "../pages/Checkout";
 import AuthPage from "../pages/Auth";
@@ -22,6 +22,7 @@ import AddProduct from "../pages/admin/AddProduct";
 import ManageProducts from "../pages/admin/ManageProducts";
 import { useLocation } from "react-router-dom";
 import PrivateRoute from "../components/PrivateRoute";
+import ProductDetail from "../pages/Products/ProductDetail";
 
 const AppRoutes = () => {
     const location = useLocation();
@@ -30,7 +31,7 @@ const AppRoutes = () => {
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<Home />} />
         <Route path="/shop" element={<Shop />} />
-        <Route path="/product" element={<ProductDetail />} />
+        <Route path="/product/:id"  element={<ProductDetail />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<CheckoutPage />} />
         <Route path="/about" element={<About />} />

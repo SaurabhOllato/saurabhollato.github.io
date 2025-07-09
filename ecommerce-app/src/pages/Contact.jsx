@@ -79,7 +79,7 @@ const socialMedia = [
 
   return (
 <motion.div
-  className="bg-gradient-to-b from-white to-pink-50 text-gray-800"
+  className="bg-gradient-to-b from-white to-pink-50 text-gray-800 mt-10"
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}
   exit={{ opacity: 0, y: -20 }}

@@ -95,7 +95,7 @@ export default function NewArrival() {
               <motion.div
                 key={index}
                 variants={fadeInUp}
-                className="bg-white/90 backdrop-blur-sm border border-primary/20 overflow-hidden transition duration-300 group"
+                className="bg-white/90 font-serif backdrop-blur-sm border border-primary/20 overflow-hidden transition duration-300 group"
               >
                 <div className="relative overflow-hidden h-44 lg:h-60 ">
                   <img

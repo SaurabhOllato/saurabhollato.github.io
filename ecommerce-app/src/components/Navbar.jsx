@@ -1,5 +1,16 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Heart, Search, User, ShoppingCart, Menu } from "lucide-react";
+import {
+  Heart,
+  Search,
+  User,
+  ShoppingCart,
+  Menu,
+  ChevronDown,
+  Package,
+  Settings,
+  LogOut,
+  LogIn,
+} from "lucide-react";
 import { useState, useEffect } from "react";
 import logo from "../assets/logo2.png";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,10 +71,10 @@ const Navbar = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Collections", path: "/collection" },
-    // { name: "New Arrivals", path: "/new" },
+    { name: "Shop", path: "/shop" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
-    { name: "Admin", path: "/admin" },
+    // { name: "Admin", path: "/admin" },
   ];
   //  cart count using redux
   const cartCount = useSelector((state) => state.cart.cartItems.length);
@@ -143,9 +154,9 @@ const Navbar = () => {
                     location.pathname === link.path
                       ? isScrolled
                         ? "text-black"
-                        : "text-white"
+                        : "text-subtext"
                       : isScrolled
-                      ? "text-black hover:text-primary"
+                      ? "text-black hover:text-black/80"
                       : "text-subtext hover:text-accent"
                   }`}
                 >
@@ -163,101 +174,132 @@ const Navbar = () => {
           </div>
 
           {/* Icons on the right */}
-          <div className="flex items-center gap-4">
-            <div className="hidden lg:flex items-center gap-4">
-              {/* USER MENU DROPDOWN */}
-              <div className="flex items-center gap-4">
-                {user ? (
-                  <div className="relative group">
-                    <button
-                      className="flex items-center gap-2 text-pink-600 font-semibold hover:text-pink-700 transition"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                    >
-                      Hi, <span className="capitalize">{user.name}</span>
-                      <User className="h-5 w-5" />
-                    </button>
-
-                    <div className="absolute right-0 hidden group-hover:flex flex-col bg-white shadow-lg rounded-xl mt-2 w-44 p-2 z-50 transition-all duration-300 ease-in-out">
-                      <Link
-                        to="/profile"
-                        className="px-3 py-2 rounded hover:bg-gray-100 text-sm font-medium text-gray-700"
-                      >
-                        🧑 Profile
-                      </Link>
-                      <Link
-                        to="/orders"
-                        className="px-3 py-2 rounded hover:bg-gray-100 text-sm font-medium text-gray-700"
-                      >
-                        📦 Orders
-                      </Link>
-                      <Link
-                        to="/contact"
-                        className="px-3 py-2 rounded hover:bg-gray-100 text-sm font-medium text-gray-700"
-                      >
-                        📞 Contact
-                      </Link>
-                      <button
-                        onClick={() => dispatch(logoutUser())}
-                        className="text-left px-3 py-2 rounded hover:bg-red-50 text-sm font-medium text-red-500 hover:text-red-600"
-                      >
-                        🚪 Logout
-                      </button>
-                    </div>
-                  </div>
-                ) : (
-                  <Link to="/auth" className="text-pink-600 font-medium">
-                    Login
-                  </Link>
-                )}
-              </div>
-            </div>
+          <div className="flex items-center gap-5 ">
+            {/* Search Bar (conditionally shown) */}
             {showSearch && (
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="ml-4 px-3 py-1 border rounded-md text-sm"
-              />
+              <div className="relative hidden md:block">
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  className="ml-4 pl-10 pr-4 py-2 border border-gray-200 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-transparent transition-all w-64"
+                />
+                <Search className="h-4 w-4 absolute left-6 top-1/2 -translate-y-1/2 text-gray-400" />
+              </div>
             )}
-            {/* wishlist */}
+
+            {/* Wishlist */}
             <Link
               to="/wishlist"
-              className={`p-1 transition-colors relative group ${
-                isScrolled
-                  ? "text-black hover:text-primary"
-                  : "text-subtext hover:text-accent"
-              }`}
+              className="p-2 relative group rounded-full hover:bg-gray-50 transition-colors"
             >
-              <Heart className="h-5 w-5" />
+              <Heart
+                className={`h-5 w-5  group-hover:text-pink-600 transition-colors ${
+                  isScrolled ? "text-black" : "text-subtext"
+                }`}
+              />
               {wishlistCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-xs px-1.5 py-0.5 rounded-full">
+                <span className="absolute -top-1 -right-1 bg-pink-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full flex items-center justify-center min-w-[20px] h-5 shadow-sm">
                   {wishlistCount}
                 </span>
               )}
+              <span className="absolute inset-0 scale-75 bg-pink-100 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all -z-10"></span>
             </Link>
-            {/* cart */}
+
+            {/* Cart */}
             <Link
               to="/cart"
-              className={`p-1 transition-colors relative group ${
-                isScrolled
-                  ? "text-black hover:text-primary"
-                  : "text-subtext hover:text-accent"
-              }`}
+              className="p-2 relative group rounded-full hover:bg-gray-50 transition-colors"
             >
-              <div className="relative">
-                <ShoppingCart className="h-5 w-5" />
-                {cartCount > 0 && (
-                  <span className="absolute -top-2 -right-2 text-xs px-1.5 py-0.5 bg-pink-600 text-white rounded-full">
-                    {cartCount}
-                  </span>
-                )}
-              </div>
-              <span
-                className={`absolute -bottom-1 left-1/2 w-0 h-0.5 transition-all group-hover:w-3/4 group-hover:-translate-x-1/2 ${
-                  isScrolled ? "bg-primary" : "bg-accent"
+              <ShoppingCart
+                className={`h-5 w-5  group-hover:text-pink-600 transition-colors ${
+                  isScrolled ? "text-black" : "text-subtext"
                 }`}
-              ></span>
+              />
+              {cartCount > 0 && (
+                <span className="absolute -top-1 -right-1 bg-pink-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-full flex items-center justify-center min-w-[20px] h-5 shadow-sm">
+                  {cartCount}
+                </span>
+              )}
+              <span className="absolute inset-0 scale-75 bg-pink-100 rounded-full opacity-0 group-hover:opacity-100 group-hover:scale-100 transition-all -z-10"></span>
             </Link>
+
+            {/* User Menu Dropdown */}
+            <div className="hidden lg:flex items-center gap-4">
+              {user ? (
+                <div className="relative group">
+                  <button
+                    className="flex items-center gap-2 font-medium hover:text-pink-600 transition-colors"
+                    aria-haspopup="true"
+                  >
+                    <span
+                      className={` hidden xl:inline-block text-sm group-hover:text-pink-600 transition-colors ${
+                        isScrolled ? "text-black" : "text-subtext"
+                      }`}
+                    >
+                      {/* Hi, {user.name.split(" ")[0]} */}
+                      {user && user.name
+                        ? `Hi, ${user.name.split(" ")[0]}`
+                        : "Hi"}
+                    </span>
+                    <ChevronDown className="h-4 w-4 hidden xl:inline-block transition-transform group-hover:rotate-180 text-subtext" />
+                    <div className="relative">
+                      <div className="w-8 h-8 rounded-full bg-gradient-to-r from-pink-500 to-purple-500 flex items-center justify-center text-white text-sm font-bold">
+                        {/* {user.name.charAt(0).toUpperCase()} */}
+                        {user?.name?.charAt(0)?.toUpperCase() || ""}
+                      </div>
+                      <div className="absolute -bottom-0.5 -right-0.5 w-3 h-3 bg-green-400 rounded-full border-2 border-white"></div>
+                    </div>
+                  </button>
+
+                  <div className="absolute right-0 hidden group-hover:block bg-white shadow-xl rounded-lg mt-2 w-56 p-2 z-50 border border-gray-100 animate-fade-in">
+                    <div className="px-4 py-3 border-b border-gray-100">
+                      <p className="font-medium text-gray-900">{user.name}</p>
+                      <p className="text-xs text-gray-500 truncate">
+                        {user.phone || "No phone number"}
+                      </p>
+                    </div>
+                    <Link
+                      to="/profile"
+                      className="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-colors"
+                    >
+                      <User className="h-4 w-4 mr-3" />
+                      My Profile
+                    </Link>
+                    <Link
+                      to="/orders"
+                      className="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-colors"
+                    >
+                      <Package className="h-4 w-4 mr-3" />
+                      My Orders
+                    </Link>
+                    <Link
+                      to="/settings"
+                      className="flex items-center px-4 py-2.5 text-sm font-medium text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-lg transition-colors"
+                    >
+                      <Settings className="h-4 w-4 mr-3" />
+                      Account Settings
+                    </Link>
+                    <div className="px-4 py-2.5 border-t border-gray-100">
+                      <button
+                        onClick={() => dispatch(logoutUser())}
+                        className="flex items-center w-full text-left text-sm font-medium text-red-500 hover:text-red-600 hover:bg-red-50 px-2 py-1.5 rounded-lg transition-colors"
+                      >
+                        <LogOut className="h-4 w-4 mr-3" />
+                        Sign Out
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <Link
+                  to="/auth"
+                  className="flex items-center gap-1.5 text-sm font-medium text-gray-600 hover:text-pink-600 transition-colors px-3 py-1.5 rounded-lg hover:bg-gray-50"
+                >
+                  <LogIn className="h-4 w-4" />
+                  <span>Login</span>
+                </Link>
+              )}
+            </div>
           </div>
         </div>
       </div>

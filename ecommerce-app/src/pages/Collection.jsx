@@ -60,12 +60,14 @@ const collections = [
 const CollectionPage = () => {
   return (
      <motion.div
-        className="bg-white text-gray-800"
+        className="bg-white text-gray-800 mt-20"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.4 }}
       >
+        
+
         <div className="py-5
          px-4 text-center mx-auto bg-white  ">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
@@ -75,12 +77,13 @@ const CollectionPage = () => {
           Explore our carefully curated jewelry collections designed to complement every style and occasion.
         </p>
       </div>
+
     <div className="min-h-screen  px-4 py-12 bg-white sm:px-6 lg:px-8">
       {/* Hero Header */}
       
 
       {/* Collections Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2  lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {collections.map((collection, index) => (
           <Link 
             to={`/collections/${collection.name.toLowerCase().replace(/\s+/g, '-')}`}
